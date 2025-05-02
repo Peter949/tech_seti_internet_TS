@@ -13,10 +13,16 @@ class Home extends PureComponent {
         return (
             <Container>
                 
-                
+                    
                     <div>
+                        <Counter/>
                         
-                        <Button color="secondary" size="large" title="Подтвердить" />
+                    
+                </div>
+            </Container>
+            
+
+            /*<Button color="secondary" size="large" title="Подтвердить" />
                     <Button color="secondary" size="large" title="Удалить" />
                     <Text size="large" weight="bold" color="primary">
                         Hello
@@ -26,13 +32,7 @@ class Home extends PureComponent {
                 </div>
 
                 <div className='h-190'>
-                    <p>Home page</p>
-                    
-                </div>
-            </Container>
-            
-//<Counter/>
-            
+                    <p>Home page</p>*/
         )
     }
 }

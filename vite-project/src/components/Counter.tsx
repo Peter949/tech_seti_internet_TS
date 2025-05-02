@@ -21,14 +21,41 @@ export const Counter: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log("Товары обновлены:", products);
-  }, [products]);
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/data");
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error("Ошибка загрузки товаров:", error);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
 
-  const handleAddProduct = (): void => {
+  const handleAddProduct = async () => {
     if (newProduct.title.trim() && newProduct.price.trim()) {
-      setProducts([...products, newProduct]);
-      setNewProduct({ title: "", description: "", price: "" });
-      setIsModalOpen(false);
+      try {
+        const response = await fetch("http://localhost:5000/data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newProduct),
+        });
+
+        if (response.ok) {
+          const savedProduct = await response.json();
+          setProducts([...products, savedProduct]);
+          setNewProduct({ title: "", description: "", price: "" });
+          setIsModalOpen(false);
+        }
+      } catch (error) {
+        console.error("Ошибка сохранения товара:", error);
+      }
     }
   };
 

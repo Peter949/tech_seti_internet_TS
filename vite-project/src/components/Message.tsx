@@ -3,14 +3,14 @@ import { Container } from "./Container";
 
 const Message: React.FC = () => {
 
-  const [data, setData] = useState<{ message: string; title: string } | null>(
+  const [data, setData] = useState<{ title: string, description: string, price: string } | null>(
     null
   );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/data");
+        const response = await fetch("http://localhost:5000/datas");
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -25,8 +25,9 @@ const Message: React.FC = () => {
         <div>
             <h1>Данные с сервера</h1>
                 {data ? (<>
-                    Message:<p>{data.message}</p>
-                    Data:<p>{data.title}</p>
+                    Title:<p>{data.title}</p>
+                    Description:<p>{data.description}</p>
+                    Price:<p>{data.price}</p>
                     </>) : (
                     <p>Loading...</p>
                 )}
